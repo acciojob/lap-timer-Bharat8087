@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './LapTimer.css'; // Create this CSS file to style the app
+import './LapTimer.css';
 
 const LapTimer = () => {
   const [time, setTime] = useState(0);
@@ -10,7 +10,7 @@ const LapTimer = () => {
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
-        setTime(prevTime => prevTime + 10);
+        setTime((prevTime) => prevTime + 10);
       }, 10);
     } else {
       clearInterval(intervalRef.current);
@@ -19,22 +19,17 @@ const LapTimer = () => {
   }, [isRunning]);
 
   const startTimer = () => setIsRunning(true);
-
   const stopTimer = () => setIsRunning(false);
-
   const resetTimer = () => {
     setIsRunning(false);
     setTime(0);
     setLaps([]);
   };
-
-  const recordLap = () => {
-    setLaps([...laps, time]);
-  };
+  const recordLap = () => setLaps([...laps, time]);
 
   const formatTime = (time) => {
-    const centiseconds = (`0${(time / 10) % 100}`).slice(-2);
-    const seconds = (`0${(time / 1000) % 60}`).slice(-2);
+    const centiseconds = (`0${Math.floor((time / 10) % 100)}`).slice(-2);
+    const seconds = (`0${Math.floor((time / 1000) % 60)}`).slice(-2);
     const minutes = (`0${Math.floor(time / 60000)}`).slice(-2);
     return `${minutes}:${seconds}.${centiseconds}`;
   };
