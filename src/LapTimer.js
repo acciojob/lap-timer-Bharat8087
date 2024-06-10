@@ -19,13 +19,20 @@ const LapTimer = () => {
   }, [isRunning]);
 
   const startTimer = () => setIsRunning(true);
+
   const stopTimer = () => setIsRunning(false);
+
   const resetTimer = () => {
     setIsRunning(false);
     setTime(0);
     setLaps([]);
   };
-  const recordLap = () => setLaps([...laps, time]);
+
+  const recordLap = () => {
+    if (isRunning) {
+      setLaps([...laps, time]);
+    }
+  };
 
   const formatTime = (time) => {
     const centiseconds = (`0${Math.floor((time / 10) % 100)}`).slice(-2);
