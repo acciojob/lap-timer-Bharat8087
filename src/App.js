@@ -1,5 +1,6 @@
 import React from 'react';
 import LapTimer from './LapTimer';
+import './App.css';
 
 function App() {
   return (
